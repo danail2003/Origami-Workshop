@@ -23,9 +23,9 @@ class Main extends Component {
     renderOrigamis() {
         const { origamis } = this.state;
 
-        return origamis.map(origami => {
+        return origamis.map((origami, index) => {
             return (
-                <Origami key={origami._id} {...origami} />
+                <Origami key={origami._id} index={index + 1} {...origami} />
             )
         })
     }
@@ -37,7 +37,7 @@ class Main extends Component {
     render() {
         return (
             <main className={styles.main}>
-                <h1 className={styles.h1}>Soooooooooooooome Heading</h1>
+                <h1 className={styles.h1}>Publications</h1>
                 <div>
                     {this.renderOrigamis()};
                 </div>
