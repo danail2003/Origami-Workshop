@@ -12,8 +12,8 @@ const Header = () => {
             <ul>
                 <img src={logo} className={styles.logo} alt="origami" />
                 {
-                    navigation.map(nav=>{
-                        return <Link href={nav.link} title={nav.title} type='header' />
+                    navigation.map((nav, index)=>{
+                        return <Link key={index} href={nav.link} title={nav.title} type='header' />
                     })
                 }
             </ul>

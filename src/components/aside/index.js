@@ -10,8 +10,8 @@ const Aside = () => {
         <aside className={styles.aside}>
             <ul>
                 {
-                    navigation.map(nav=>{
-                        return <Link href={nav.link} title={nav.title} type='aside' />
+                    navigation.map((nav, index)=>{
+                        return <Link key={index} href={nav.link} title={nav.title} type='aside' />
                     })
                 }
             </ul>

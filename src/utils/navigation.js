@@ -6,7 +6,7 @@ const getNavigation = (userId) => {
         },
         {
             title: 'Share your thoughts',
-            link: '/share/'
+            link: '/share'
         },
         {
             title: 'Register',
