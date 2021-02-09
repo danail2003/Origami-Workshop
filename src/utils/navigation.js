@@ -10,11 +10,11 @@ const getNavigation = (userId) => {
         },
         {
             title: 'Register',
-            link: '/register/'
+            link: '/register'
         },
         {
             title: 'Login',
-            link: '/login/'
+            link: '/login'
         },
         {
             title: 'Profile',

@@ -7,7 +7,7 @@ const Navigation = () => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path='/' component={HomePage} />
+                <Route path='/' exact component={HomePage} />
                 <Route path='/share' component={Share} />
             </Switch>
         </BrowserRouter>

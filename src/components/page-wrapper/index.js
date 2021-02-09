@@ -10,7 +10,9 @@ function PageWrapper(props) {
             <Header />
             <div className={styles.container}>
                 <Aside />
+            <main className={styles.main}>
                 {props.children}
+            </main>
             </div>
             <Footer />
         </div>

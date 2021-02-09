@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Origami from '../origami/index';
-import styles from './main.module.css';
+import Origami from '../components/origami';
 
-class Main extends Component {
+class Origamis extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             origamis: []
@@ -36,14 +35,11 @@ class Main extends Component {
 
     render() {
         return (
-            <main className={styles.main}>
-                <h1 className={styles.h1}>Publications</h1>
-                <div>
-                    {this.renderOrigamis()};
-                </div>
-            </main>
+            <div>
+                {this.renderOrigamis()}
+            </div>
         )
     }
 }
 
-export default Main;
+export default Origamis;

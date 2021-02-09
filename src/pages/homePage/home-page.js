@@ -1,13 +1,15 @@
 import React from 'react';
-import Main from '../../components/main/index';
 import PageWrapper from '../../components/page-wrapper/index';
+import Title from '../../components/title/index';
+import RenderOrigamis from '../../utils/render-origamis';
 
-function HomePage() {
+const Main = () => {
   return (
     <PageWrapper>
-      <Main />
+      <Title title='Publications' />
+        <RenderOrigamis />
     </PageWrapper>
-  );
+  )
 }
 
-export default HomePage;
+export default Main;
