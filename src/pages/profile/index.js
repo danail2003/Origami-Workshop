@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageWrapper from '../../components/page-wrapper/index';
 import RenderOrigamis from '../../utils/render-origamis';
 import styles from './profile.module.css';
+import UserContext from '../../context';
 
 class Profile extends Component {
     constructor(props) {
@@ -32,6 +33,13 @@ class Profile extends Component {
         });
     }
 
+    static contextType = UserContext;
+
+    logOut = () => {
+        this.context.logOut();
+        this.props.history.push('/');
+    }
+
     render() {
         const { username, posts } = this.state;
 
@@ -55,6 +63,7 @@ class Profile extends Component {
                             <span>Posts:</span>
                             {posts}
                         </p>
+                    <button className={styles.button} onClick={this.logOut}>Logout</button>
                     </div>
                     <h2>3 of your recent posts</h2>
                 </div>

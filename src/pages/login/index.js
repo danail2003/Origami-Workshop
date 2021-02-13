@@ -29,8 +29,6 @@ class Login extends Component {
 
         const { username, password } = this.state;
 
-        console.log(this.context)
-
         if (!username || !password) {
             return;
         }
