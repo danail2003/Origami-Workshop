@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PageWrapper from '../../components/page-wrapper/index';
 import RenderOrigamis from '../../utils/render-origamis';
-import Title from '../../components/title/index';
 import styles from './profile.module.css';
 
 class Profile extends Component {
