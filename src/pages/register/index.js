@@ -8,7 +8,7 @@ class Register extends Component {
         super(props);
 
         this.state = {
-            email: "",
+            username: "",
             password: "",
             rePassword: ""
         };
@@ -21,17 +21,55 @@ class Register extends Component {
         this.setState(newState);
     }
 
+    handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const { username, password, rePassword } = this.state;
+
+        if(!username || !password || !rePassword || password !== rePassword) {
+            return;
+        }
+
+        try {
+            const promise = await fetch('http://localhost:9999/api/user/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username,
+                    password,
+                    rePassword
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const token = promise.headers.get('Authorization');
+            document.cookie = `x-auth-token=${token}`;
+
+            const response = await promise.json();
+
+            if (!response.username || !token) {
+                return;
+            }
+
+            this.props.history.push('/');
+        }
+        catch (e) {
+            alert(e);
+        }
+    };
+
     render() {
-        const { email, password, rePassword } = this.state;
+        const { username, password, rePassword } = this.state;
 
         return (
             <PageWrapper>
                 <div className={styles.register}>
                     <Title title='Register Page' />
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className={styles['form-control']}>
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" onChange={(e) => this.onChange(e, "email") } value={email} />
+                            <label htmlFor="username">Username</label>
+                            <input type="text" id="username" onChange={(e) => this.onChange(e, "username") } value={username} />
                         </div>
                         <div className={styles['form-control']}>
                             <label htmlFor="password">Password</label>
@@ -42,7 +80,7 @@ class Register extends Component {
                             <input type="password" id="rePassword" onChange={(e) => this.onChange(e, 'rePassword') } value={rePassword} />
                         </div>
                         <div className={styles['form-control']}>
-                            <button className={styles.button}>Register</button>
+                            <button type="submit" className={styles.button}>Register</button>
                         </div>
                     </form>
                 </div>
