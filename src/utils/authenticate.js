@@ -1,4 +1,4 @@
-const authenticate = async (url, body, props) => {
+const authenticate = async (url, body, onSuccess) => {
     try {
         const promise = await fetch(url, {
             method: 'POST',
@@ -17,7 +17,10 @@ const authenticate = async (url, body, props) => {
             return;
         }
 
-        props.history.push('/');
+        onSuccess({
+            username: response.username,
+            id: response._id
+        })
     }
     catch (e) {
         alert(e);

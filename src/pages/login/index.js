@@ -3,6 +3,7 @@ import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
 import styles from './login.module.css';
 import authenticate from '../../utils/authenticate';
+import UserContext from '../../context';
 
 class Login extends Component {
     constructor(props) {
@@ -21,10 +22,14 @@ class Login extends Component {
         this.setState(newState);
     }
 
+    static contextType = UserContext;
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
         const { username, password } = this.state;
+
+        console.log(this.context)
 
         if (!username || !password) {
             return;
@@ -33,7 +38,10 @@ class Login extends Component {
         await authenticate('http://localhost:9999/api/user/login', {
             username,
             password
-        }, this.props);
+        }, (user) => {
+            this.context.logIn(user);
+            this.props.history.push('/');
+        });
     };
 
     render() {

@@ -3,6 +3,7 @@ import styles from './register.module.css';
 import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
 import authenticate from '../../utils/authenticate';
+import UserContext from '../../context';
 
 class Register extends Component {
     constructor(props) {
@@ -22,6 +23,8 @@ class Register extends Component {
         this.setState(newState);
     }
 
+    static contextType = UserContext;
+
     handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -32,7 +35,10 @@ class Register extends Component {
         }
 
         await authenticate('http://localhost:9999/api/user/register', {
-            username, password, rePassword }, this.props);
+            username, password, rePassword }, (user) => {
+                this.context.logIn(user);
+                this.props.history.push('/');
+            });
     };
 
     render() {
