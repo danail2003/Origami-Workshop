@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
 import styles from './login.module.css';
+import authenticate from '../../utils/authenticate';
 
 class Login extends Component {
     constructor(props) {
@@ -25,36 +26,14 @@ class Login extends Component {
 
         const { username, password } = this.state;
 
-        if(!username || !password) {
+        if (!username || !password) {
             return;
         }
 
-        try {
-            const promise = await fetch('http://localhost:9999/api/user/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    username,
-                    password
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-
-            const token = promise.headers.get('Authorization');
-            document.cookie = `x-auth-token=${token}`;
-
-            const response = await promise.json();
-
-            if (!response.username || !token) {
-                return;
-            }
-
-            this.props.history.push('/');
-        }
-        catch (e) {
-            alert(e);
-        }
+        await authenticate('http://localhost:9999/api/user/login', {
+            username,
+            password
+        }, this.props);
     };
 
     render() {

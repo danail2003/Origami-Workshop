@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './register.module.css';
 import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
+import authenticate from '../../utils/authenticate';
 
 class Register extends Component {
     constructor(props) {
@@ -26,37 +27,12 @@ class Register extends Component {
 
         const { username, password, rePassword } = this.state;
 
-        if(!username || !password || !rePassword || password !== rePassword) {
+        if (!username || !password || !rePassword || password !== rePassword) {
             return;
         }
 
-        try {
-            const promise = await fetch('http://localhost:9999/api/user/register', {
-                method: 'POST',
-                body: JSON.stringify({
-                    username,
-                    password,
-                    rePassword
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const token = promise.headers.get('Authorization');
-            document.cookie = `x-auth-token=${token}`;
-
-            const response = await promise.json();
-
-            if (!response.username || !token) {
-                return;
-            }
-
-            this.props.history.push('/');
-        }
-        catch (e) {
-            alert(e);
-        }
+        await authenticate('http://localhost:9999/api/user/register', {
+            username, password, rePassword }, this.props);
     };
 
     render() {
@@ -69,15 +45,15 @@ class Register extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className={styles['form-control']}>
                             <label htmlFor="username">Username</label>
-                            <input type="text" id="username" onChange={(e) => this.onChange(e, "username") } value={username} />
+                            <input type="text" id="username" onChange={(e) => this.onChange(e, "username")} value={username} />
                         </div>
                         <div className={styles['form-control']}>
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" onChange={(e) => this.onChange(e, "password") } value={password} />
+                            <input type="password" id="password" onChange={(e) => this.onChange(e, "password")} value={password} />
                         </div>
                         <div className={styles['form-control']}>
                             <label htmlFor="rePassword">Re-password</label>
-                            <input type="password" id="rePassword" onChange={(e) => this.onChange(e, 'rePassword') } value={rePassword} />
+                            <input type="password" id="rePassword" onChange={(e) => this.onChange(e, 'rePassword')} value={rePassword} />
                         </div>
                         <div className={styles['form-control']}>
                             <button type="submit" className={styles.button}>Register</button>
