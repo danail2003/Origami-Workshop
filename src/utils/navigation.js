@@ -1,4 +1,4 @@
-const getNavigation = (loggedIn, user) => {
+const getNavigation = (user) => {
     const userLinks = [
         {
             title: 'Publications',
@@ -29,6 +29,8 @@ const getNavigation = (loggedIn, user) => {
         }
     ];
 
+    const loggedIn = user && user.loggedIn;
+    
     return loggedIn ? userLinks : guestLinks;
 };
 

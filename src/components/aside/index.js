@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import Link from '../link/index';
 import styles from './aside.module.css';
 import getNavigation from '../../utils/navigation';
 import UserContext from '../../context';
 
-class Aside extends Component {
-    static contextType = UserContext;
+const Aside = () => {
+    const { user } = useContext(UserContext);
+    const navigation = getNavigation(user);
 
-    render() {
-        const {loggedIn, user}=this.context;
-        const navigation = getNavigation(loggedIn, user);
-
-        return (
-            <aside className={styles.aside}>
-                <ul>
-                    {
-                        navigation.map((nav, index)=>{
-                            return <Link key={index} href={nav.link} title={nav.title} type='aside' />
-                        })
-                    }
-                </ul>
-            </aside>
-        )
-    }
+    return (
+        <aside className={styles.aside}>
+            <ul>
+                {
+                    navigation.map((nav, index) => {
+                        return <Link key={index} href={nav.link} title={nav.title} type='aside' />
+                    })
+                }
+            </ul>
+        </aside>
+    )
 };
 
 export default Aside;
