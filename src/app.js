@@ -49,7 +49,6 @@ const App = (props) => {
                     logOut();
                 }
             })
-
     }, [])
 
     return (

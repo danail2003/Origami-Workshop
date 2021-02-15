@@ -1,76 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PageWrapper from '../../components/page-wrapper/index';
 import RenderOrigamis from '../../utils/render-origamis';
 import styles from './profile.module.css';
 import UserContext from '../../context';
 
-class Profile extends Component {
-    constructor(props) {
-        super(props)
+const Profile = (props) => {
+    const [username, setUsername] = useState(null);
+    const [posts, setPosts] = useState(null);
+    const context = useContext(UserContext);
 
-        this.state = {
-            username: null,
-            posts: null
-        }
-    }
-
-    componentDidMount() {
-        this.getUser(this.props.match.params.userId);
-    }
-
-    getUser = async (id) => {
+    const getUser = async (id) => {
         const promise = await fetch(`http://localhost:9999/api/user?id=${id}`);
 
         if (!promise.ok) {
-            this.props.history.push('/error');
+            props.history.push('/error');
         }
 
         const user = await promise.json();
 
-        this.setState({
-            username: user.username,
-            posts: user.posts.length
-        });
+        setUsername(user.username);
+        setPosts(user.posts.length);
     }
 
-    static contextType = UserContext;
+    useEffect(() => {
+        getUser(props.match.params.userId)
+    });
 
-    logOut = () => {
-        this.context.logOut();
-        this.props.history.push('/');
+    const logOut = () => {
+        context.logOut();
+        props.history.push('/');
     }
 
-    render() {
-        const { username, posts } = this.state;
-
-        if (!username) {
-            return (
-                <PageWrapper>
-                    <div>Loading...</div>
-                </PageWrapper>
-            )
-        }
-
+    if (!username) {
         return (
             <PageWrapper>
-                <div className={styles.profile}>
-                    <div className={styles['personal-info']}>
-                        <p>
-                            <span>Email:</span>
-                            {username}
-                        </p>
-                        <p>
-                            <span>Posts:</span>
-                            {posts}
-                        </p>
-                    <button className={styles.button} onClick={this.logOut}>Logout</button>
-                    </div>
-                    <h2>3 of your recent posts</h2>
-                </div>
-                <RenderOrigamis length={3} />
+                <div>Loading...</div>
             </PageWrapper>
         )
     }
+
+    return (
+        <PageWrapper>
+            <div className={styles.profile}>
+                <div className={styles['personal-info']}>
+                    <p>
+                        <span>Email:</span>
+                        {username}
+                    </p>
+                    <p>
+                        <span>Posts:</span>
+                        {posts}
+                    </p>
+                <button className={styles.button} onClick={logOut}>Logout</button>
+                </div>
+                <h2>3 of your recent posts</h2>
+            </div>
+            <RenderOrigamis length={3} />
+        </PageWrapper>
+    )
 };
 
 export default Profile;
