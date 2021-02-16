@@ -6,18 +6,18 @@ const Origamis = (props) => {
     const context = useContext(UserContext);
     const [origamis, setOrigamis] = useState(context.origamis || []);
 
-    const getOrigami = async () => {
+    const getOrigami = useCallback(async () => {
         const { length } = props;
         const promise = await fetch(`http://localhost:9999/api/origami?length=${length}`);
         const response = await promise.json();
 
         return response;
-    }
+    }, [props])
 
     const getOrigamis = useCallback(async () => {
         const origamis = await getOrigami(props.length);
         setOrigamis(origamis);
-    }, [props.lengt]);
+    }, [props.length, getOrigami]);
 
     const renderOrigamis = useMemo(() => {
         return origamis.map((origami, index) => {

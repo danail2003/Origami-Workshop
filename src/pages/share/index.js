@@ -21,6 +21,7 @@ const Share = (props) => {
             }
         });
 
+        console.log(request);
         props.history.push('/');
     };
 
