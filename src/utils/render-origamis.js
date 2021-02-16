@@ -1,46 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
 import Origami from '../components/origami';
+import UserContext from '../context';
 
-class Origamis extends Component {
-    constructor(props) {
-        super(props)
+const Origamis = (props) => {
+    const context = useContext(UserContext);
+    const [origamis, setOrigamis] = useState(context.origamis || []);
 
-        this.state = {
-            origamis: []
-        };
-    }
-
-    getOrigamis = async () => {
-        const { length } = this.props;
+    const getOrigami = async () => {
+        const { length } = props;
         const promise = await fetch(`http://localhost:9999/api/origami?length=${length}`);
-        const origamis = await promise.json();
+        const response = await promise.json();
 
-        this.setState({
-            origamis
-        });
+        return response;
     }
 
-    renderOrigamis() {
-        const { origamis } = this.state;
+    const getOrigamis = useCallback(async () => {
+        const origamis = await getOrigami(props.length);
+        setOrigamis(origamis);
+    }, [props.lengt]);
 
+    const renderOrigamis = useMemo(() => {
         return origamis.map((origami, index) => {
             return (
                 <Origami key={origami._id} index={index + 1} {...origami} />
             )
         })
-    }
+    }, [origamis]);
 
-    componentDidMount() {
-        this.getOrigamis();
-    }
+    useEffect(() => {
+        getOrigamis();
+    }, [props, getOrigamis]);
 
-    render() {
-        return (
-            <div>
-                {this.renderOrigamis()}
-            </div>
-        )
-    }
-}
+    return (
+        <div>
+            {renderOrigamis}
+        </div>
+    )
+};
 
 export default Origamis;
