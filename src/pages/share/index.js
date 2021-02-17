@@ -21,7 +21,9 @@ const Share = (props) => {
             }
         });
 
-        console.log(request);
+        const response = await request.json();
+        console.log(response);
+
         props.history.push('/');
     };
 

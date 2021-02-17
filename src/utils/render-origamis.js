@@ -1,39 +1,31 @@
-import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Origami from '../components/origami';
-import UserContext from '../context';
 
 const Origamis = (props) => {
-    const context = useContext(UserContext);
-    const [origamis, setOrigamis] = useState(context.origamis || []);
-
-    const getOrigami = useCallback(async () => {
-        const { length } = props;
-        const promise = await fetch(`http://localhost:9999/api/origami?length=${length}`);
-        const response = await promise.json();
-
-        return response;
-    }, [props])
+    const [origamis, setOrigamis] = useState([]);
 
     const getOrigamis = useCallback(async () => {
-        const origamis = await getOrigami(props.length);
-        setOrigamis(origamis);
-    }, [props.length, getOrigami]);
+        const promise = await fetch(`http://localhost:9999/api/origami?length=${props.length}`);
+        const origamis = await promise.json();
 
-    const renderOrigamis = useMemo(() => {
+        setOrigamis(origamis);
+    }, [props.length])
+
+    const renderOrigamis = () => {
         return origamis.map((origami, index) => {
             return (
                 <Origami key={origami._id} index={index + 1} {...origami} />
             )
         })
-    }, [origamis]);
+    };
 
     useEffect(() => {
         getOrigamis();
-    }, [props, getOrigamis]);
+    }, [getOrigamis]);
 
     return (
         <div>
-            {renderOrigamis}
+            {renderOrigamis()}
         </div>
     )
 };
