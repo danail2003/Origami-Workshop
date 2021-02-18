@@ -3,14 +3,19 @@ import UserContext from './context';
 import getCookie from './utils/getCookie';
 
 const App = (props) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(props.user ? {
+        ...props.user,
+        loggedIn: true
+    } : null);
 
     const logIn = (user) => {
         setUser({
-            loggedIn: true,
-            ...user
+            ...user,
+            loggedIn: true
         });
     };
+
+    const origamis = props.origamis || [];
 
     const logOut = () => {
         document.cookie = 'x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
@@ -54,6 +59,7 @@ const App = (props) => {
     return (
         <UserContext.Provider value={{
             user,
+            origamis,
             logIn,
             logOut
         }}>

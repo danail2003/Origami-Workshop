@@ -1,15 +1,17 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './register.module.css';
 import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
 import authenticate from '../../utils/authenticate';
 import UserContext from '../../context';
 
-const Register = (props) => {
+const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
     const context = useContext(UserContext);
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +23,7 @@ const Register = (props) => {
         await authenticate('http://localhost:9999/api/user/register', {
             username, password, rePassword }, (user) => {
                 context.logIn(user);
-                props.history.push('/');
+                history.push('/');
             });
     };
 

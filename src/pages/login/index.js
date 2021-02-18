@@ -1,14 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import PageWrapper from '../../components/page-wrapper/index';
 import Title from '../../components/title/index';
 import styles from './login.module.css';
 import authenticate from '../../utils/authenticate';
 import UserContext from '../../context';
 
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const context = useContext(UserContext);
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +24,7 @@ const Login = (props) => {
             password
         }, (user) => {
             context.logIn(user);
-            props.history.push('/');
+            history.push('/');
         });
     };
 
@@ -33,11 +35,11 @@ const Login = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className={styles['form-control']}>
                         <label htmlFor="username">Username</label>
-                        <input type="username" id="username" onChange={(e) => {setUsername(e.target.value)}} value={username} />
+                        <input type="username" id="username" onChange={(e) => { setUsername(e.target.value) }} value={username} />
                     </div>
                     <div className={styles['form-control']}>
                         <label htmlFor='password'>Password</label>
-                        <input type='password' id='password' onChange={(e) => {setPassword(e.target.value)}} value={password} />
+                        <input type='password' id='password' onChange={(e) => { setPassword(e.target.value) }} value={password} />
                     </div>
                     <div className={styles['form-control']}>
                         <button type="submit" className={styles.button}>Login</button>
