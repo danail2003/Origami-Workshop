@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render authenticated routes 1`] = `
+<footer
+  className="footer"
+>
+  <ul>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/share"
+        onClick={[Function]}
+      >
+        Share your thoughts
+      </a>
+    </li>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/profile/456"
+        onClick={[Function]}
+      >
+        Profile
+      </a>
+    </li>
+    <img
+      alt="origami"
+      className="logo"
+      src="blue-origami-bird-flipped.png"
+    />
+  </ul>
+  <p
+    className="paragraph"
+  >
+    Software University © 2019
+  </p>
+</footer>
+`;
+
+exports[`Footer should render non-authenticated routes 1`] = `
+<footer
+  className="footer"
+>
+  <ul>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </li>
+    <li
+      className="footer-list-item"
+    >
+      <a
+        className="footer-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </li>
+    <img
+      alt="origami"
+      className="logo"
+      src="blue-origami-bird-flipped.png"
+    />
+  </ul>
+  <p
+    className="paragraph"
+  >
+    Software University © 2019
+  </p>
+</footer>
+`;

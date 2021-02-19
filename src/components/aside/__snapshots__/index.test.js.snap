@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aside should render authenticated routes 1`] = `
+<aside
+  className="aside"
+>
+  <ul>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/share"
+        onClick={[Function]}
+      >
+        Share your thoughts
+      </a>
+    </li>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/profile/456"
+        onClick={[Function]}
+      >
+        Profile
+      </a>
+    </li>
+  </ul>
+</aside>
+`;
+
+exports[`Aside should render non-authenticated routes 1`] = `
+<aside
+  className="aside"
+>
+  <ul>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </li>
+    <li
+      className="aside-list-item"
+    >
+      <a
+        className="aside-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </li>
+  </ul>
+</aside>
+`;

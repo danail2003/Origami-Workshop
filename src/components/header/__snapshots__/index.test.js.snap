@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render authenticated routes 1`] = `
+<nav
+  className="navigation"
+>
+  <ul>
+    <img
+      alt="origami"
+      className="logo"
+      src="white-origami-bird.png"
+    />
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/share"
+        onClick={[Function]}
+      >
+        Share your thoughts
+      </a>
+    </li>
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/profile/456"
+        onClick={[Function]}
+      >
+        Profile
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`Header should render non-authenticated routes 1`] = `
+<nav
+  className="navigation"
+>
+  <ul>
+    <img
+      alt="origami"
+      className="logo"
+      src="white-origami-bird.png"
+    />
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Publications
+      </a>
+    </li>
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/register"
+        onClick={[Function]}
+      >
+        Register
+      </a>
+    </li>
+    <li
+      className="header-list-item"
+    >
+      <a
+        className="header-link"
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
