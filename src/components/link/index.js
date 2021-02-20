@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const LinkComponent = ({ href, title, type }) => {
     return (
-        <li className={styles[`${type}-list-item`]}>
+        <li data-test-id={`link-${title}`} className={styles[`${type}-list-item`]}>
             <Link to={href} className={styles[`${type}-link`]}>{title}</Link>
         </li>
     )
